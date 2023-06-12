@@ -1,6 +1,7 @@
 from sys import platform
 from os import system, remove
 from typing import Any
+from json import loads
 
 class TemporaryFile:
 	
@@ -41,4 +42,4 @@ class JSExec:
 	) -> str:
 		with TemporaryFile(filename=tmp_filename) as tmp:
 		system(f"node {filename} >> {tmp_filename}")
-		return tmp.read()
+		return loads(tmp.read())
