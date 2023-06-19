@@ -1,14 +1,12 @@
-from compiler import Compiler
+from os import listdir, system
+from jsexec import JSeval, JSexec
 
-def IMPORT_MODULE(from_, module):
-	exec(f"global {module}; from {from_} import {module}")
+system('python compiler.py build_ext --inplace')
 
-compiler = Compiler()
-
-for module in ["binder.cpp", "damerau_levenshtein.cxx"]:
-	module_name = compiler.compile(module)
-	IMPORT_MODULE(module_name, module_name)
-
-del compiler
-
-from jsexec import TemporaryFile, JSExec
+for file in listdir():
+	if file.endswith((
+		'.c', '.h', '.cc',
+		'.hpp', '.cpp', '.cxx',
+		'.h++', '.hh', '.hxx'
+	)):
+		exec(f"import {file.split('.')[0]}")
