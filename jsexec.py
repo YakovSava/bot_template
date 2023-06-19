@@ -1,5 +1,4 @@
-from sys import platform
-from os import system, remove
+from os import system
 from typing import Any
 from json import loads
 
@@ -33,7 +32,7 @@ class JSExec:
 	
 	def _check_node(self) -> bool:
 		with TemporaryFile(filename=".tempCheckNode") as tmp:
-			os.system(f"node --version >> {tmp.filename}")
+			system(f"node --version >> {tmp.filename}")
 			return tmp.read().lower().startswith("version")
 	
 	def jsexec(self,
@@ -41,5 +40,5 @@ class JSExec:
 		tmp_filename:str=".node"
 	) -> str:
 		with TemporaryFile(filename=tmp_filename) as tmp:
-		system(f"node {filename} >> {tmp_filename}")
-		return loads(tmp.read())
+			system(f"node {filename} >> {tmp_filename}")
+			return loads(tmp.read())

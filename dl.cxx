@@ -1,20 +1,19 @@
 # include <Python.h>
 # include <algorithm>
 # include <string>
+# include <vector>
 using namespace std;
 
 
 
-string concatinate(string first, string second) {
-    string endline = "\n";
-    return first + endline +second;
-}
 
 int Cdamerau_levenshtein_distance(string s, string t) {
 
     int len_s = s.length();
     int len_t = t.length();
-    int d[len_s + 1][len_t + 1];
+
+    // Создаем вектор d с нужным размером, заполненный нулями
+    vector<vector<int>> d(len_s + 1, vector<int>(len_t + 1, 0));
 
     for (int i = 0; i <= len_s; i++) {
         d[i][0] = i;
@@ -67,12 +66,12 @@ static PyMethodDef methods[] = {
 
 static struct PyModuleDef module = {
     PyModuleDef_HEAD_INIT,
-    "damerau_levenshtein",
+    "dl",
     "Damerau levenshtein distance calculator",
     -1,
     methods
 };
 
-PyMODINIT_FUNC PyInit_damerau_levenshtein(void) {
+PyMODINIT_FUNC PyInit_dl(void) {
     return PyModule_Create(&module);
 }
