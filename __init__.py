@@ -1,7 +1,11 @@
+from sys import platform
 from os import listdir, system
 from jsexec import JSeval, JSexec
 
-system('python compiler.py build_ext --inplace')
+if platform == 'win32':
+	system('python compiler.py build_ext --inplace')
+else:
+	system('python3 compiler.py build_ext --inplace')
 
 for file in listdir():
 	if file.endswith((
