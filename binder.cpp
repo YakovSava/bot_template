@@ -24,37 +24,37 @@ string Cread(const char* filename) {
     return lines;
 }
 
-// int Cwrite(const char* filename, const char* lines) {
-//     ofstream file(filename);
-//     if (file.is_open()) {
-//         file << lines << endl;
-//         file.close();
-//         return 1;
-//     } else {
-//         file.close();
-//         return 0;
-//     }
-// }
+int Cwrite(const char* filename, const char* lines) {
+    ofstream file(filename);
+    if (file.is_open()) {
+        file << lines << endl;
+        file.close();
+        return 1;
+    } else {
+        file.close();
+        return 0;
+    }
+}
 
-// static PyObject* write(PyObject* self, PyObject* args) {
-//     PyObject *filename_obj, *data_obj;
+static PyObject* write(PyObject* self, PyObject* args) {
+    PyObject *filename_obj, *data_obj;
 
-//     if (!PyArg_ParseTuple(args, "UU", &filename_obj, &data_obj)) {
-//         return NULL;
-//     }
+    if (!PyArg_ParseTuple(args, "UU", &filename_obj, &data_obj)) {
+        return NULL;
+    }
 
-//     const char *filename = PyUnicode_AsUTF8(filename_obj);
-//     const char *data = PyUnicode_AsUTF8(data_obj);
+    const char *filename = PyUnicode_AsUTF8(filename_obj);
+    const char *data = PyUnicode_AsUTF8(data_obj);
 
-//     int result = Cwrite(filename, data);
+    int result = Cwrite(filename, data);
 
-//     delete filename, data;
+    delete filename, data;
 
-//     Py_DECREF(filename_obj);
-//     Py_DECREF(data_obj);
+    Py_DECREF(filename_obj);
+    Py_DECREF(data_obj);
 
-//     Py_RETURN_NONE;
-// }
+    Py_RETURN_NONE;
+}
 
 static PyObject* read(PyObject* self, PyObject* args) {
     PyObject* filename_obj;
