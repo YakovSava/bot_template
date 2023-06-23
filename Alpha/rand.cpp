@@ -1,22 +1,17 @@
 # include <Python.h>
 # include <cstdlib>
 # include <ctime>
-# include <string>
 using namespace std;
 
 class Random {
 public:
-  Random(int seed) {
-    if (seed == 0) {
-      srand(time(NULL));
-    } else {
-      srand(seed);
-    }
-  };
+    Random() {
+        // srand(time(NULL));
+    };
 
-  int randint(int range_min, int range_max) {
-    return ((double)rand() / RAND_MAX) * (range_max - range_min) + range_min;
-  }
+    int randint(int range_min, int range_max) {
+      return ((double)rand() / RAND_MAX) * (range_max - range_min) + range_min;
+    }
 };
 
 typedef struct {
@@ -24,7 +19,19 @@ typedef struct {
     Random *obj;
 } py_Random;
 
-static const char* keywords[] = { "seed", nullptr };
+// PyObject* del_item_in_list(PyObject* list, int index) {
+
+//     int size = PyList_Size(list);
+
+//     if (index < 0 || index >= size) {
+//         PyErr_SetString(PyExc_IndexError, "Index out of range.");
+//         return NULL;
+//     }
+
+//     PyList_DelItem(list, index);
+
+//     Py_RETURN_NONE;
+// }
 
 static PyObject *py_Random_new(PyTypeObject *type, PyObject *args, PyObject *kwds) {
     py_Random *self;
@@ -35,15 +42,9 @@ static PyObject *py_Random_new(PyTypeObject *type, PyObject *args, PyObject *kwd
     return (PyObject *) self;
 }
 
-static int py_Random_init(py_Random *self, PyObject *args, PyObject *kwargs) {
-    const char* seed_str;
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s", (char**)keywords, &seed_str)) {
-        return -1;
-    }
-
-    int seed = stoi(seed_str);
-
-    self->obj = new Random(seed);
+// Метод для инициализации объекта
+static int py_Random_init(py_Random *self) {
+    self->obj = new Random();
 
     return 0;
 }
