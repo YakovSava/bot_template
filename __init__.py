@@ -14,3 +14,5 @@ for file in listdir():
 		'.h++', '.hh', '.hxx'
 	)):
 		exec(f"import {file.split('.')[0]}")
+
+from recomendate import recomendate

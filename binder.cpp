@@ -75,7 +75,7 @@ static PyObject* read(PyObject* self, PyObject* args) {
 
 static PyMethodDef methods[] = {
     {"read", read, METH_VARARGS, "Read file (C++)"},
-    // {"write", write, METH_VARARGS, "Write to file (C++)"},
+    {"write", write, METH_VARARGS, "Write to file (C++)"},
     {NULL, NULL, 0, NULL} 
 };
 
