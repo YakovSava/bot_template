@@ -25,7 +25,7 @@ for file in listdir():
 			)]
 		)
 
-	elif file.endswith('.pyx'):
+	elif file.endswith(('.pyx', '.pxd')):
 		setup(
 			ext_modules=cythonize([file])
 		)
