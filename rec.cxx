@@ -21,7 +21,7 @@ vector<int> func(vector<int> lst) {
     return lst;
 }
 
-PyObject* recomendate(PyObject* self, PyObject* args) {
+PyObject* sorting_by_frequency(PyObject* self, PyObject* args) {
     PyObject* lst_obj;
     if (!PyArg_ParseTuple(args, "O", &lst_obj)) {
         return NULL;
@@ -49,7 +49,7 @@ PyObject* recomendate(PyObject* self, PyObject* args) {
 }
 
 static PyMethodDef methods[] = {
-    {"recomendate", recomendate, METH_VARARGS, "Recomendate"},
+    {"sorting_by_frequency", sorting_by_frequency, METH_VARARGS, "Implementation of frequency sorting in C++"},
     {NULL, NULL, 0, NULL} 
 };
 
