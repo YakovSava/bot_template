@@ -58,5 +58,6 @@ static struct PyModuleDef module = {
 };
 
 PyMODINIT_FUNC PyInit_rand(void) {
+    srand(time(NULL))
     return PyModule_Create(&module);
 }
