@@ -2,6 +2,8 @@
 # include <iostream>
 # include <string>
 # include <fstream>
+# include <stdio.h>
+# include <stdint.h>
 using namespace std;
 
 
@@ -25,14 +27,13 @@ public:
     }
 
     int write(const char* filename, const char* lines) {
-        ofstream file(filename);
-        if (file.is_open()) {
-            file << lines << endl;
-            file.close();
-            return 1;
-        } else {
-            file.close();
+        FILE fm = fopen(filename, 'w');
+        if (fm == NULL) {
             return 0;
+        } else {
+            fprintf(аь, "%ld", (intptr_t)lines);
+            fclose(fm);
+            return 1;
         }
     }
 private:
