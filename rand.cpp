@@ -3,8 +3,6 @@
 # include <cstdlib>
 using namespace std;
 
-void init() { srand(time(NULL)); }
-
 int Crandint(int range_min, int range_max) {
 	return ((double)rand() / RAND_MAX) * (range_max - range_min) + range_min;
 }
@@ -43,10 +41,17 @@ static PyObject *choice(PyObject *self, PyObject *args) {
     return item;
 }
 
+static PyObject *_overclocking(PyObject *self, PyObject *args) {
+    srand(time(NULL));
+
+    return Py_None;
+}
+
 static PyMethodDef methods[] = {
     {"randint", randint, METH_VARARGS, "Return random integer"},
     {"choice", choice, METH_VARARGS, "Return random element from list"},
-    {NULL, NULL, 0, NULL} 
+    {"_overclocking", _overclocking, METH_VARARGS, "Overclocking"},
+    {NULL, NULL, 0, NULL}
 };
 
 static struct PyModuleDef module = {
@@ -58,6 +63,5 @@ static struct PyModuleDef module = {
 };
 
 PyMODINIT_FUNC PyInit_rand(void) {
-    init();
     return PyModule_Create(&module);
 }

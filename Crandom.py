@@ -1,4 +1,6 @@
-from rand import randint, choice
+from rand import randint, choice, _overclocking
+
+_overclocking()
 
 def shuffle(lst:list) -> list:
 	'''
